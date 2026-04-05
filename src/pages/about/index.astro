@@ -1,0 +1,333 @@
+---
+import Page from '../../layouts/Page.astro';
+---
+<Page
+  title="About — Stream by River Records"
+  description="Stream was built by physicians who spent years researching why clinical documentation fails. Meet the team behind the product.">
+
+<style>
+/* Hero */
+.about-hero {
+  padding: 80px 0 64px;
+  text-align: center;
+}
+.about-hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  color: var(--ink);
+  max-width: 820px;
+  margin: 0 auto 22px;
+}
+.about-hero h1 em { font-style: italic; color: var(--primary); }
+.about-hero-sub {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.68;
+}
+
+/* Origin story */
+.origin {
+  padding: 64px 0 72px;
+}
+.origin-prose {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.origin-prose p {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  line-height: 1.72;
+  margin-bottom: 24px;
+}
+.origin-prose p:last-child { margin-bottom: 0; }
+
+/* Team */
+.team { padding: 72px 0; }
+.team-header { max-width: 640px; margin-bottom: 40px; }
+.team-header h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.team-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+  padding: 28px 24px;
+}
+.team-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+.team-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+  display: block;
+}
+a.team-name {
+  text-decoration: none;
+}
+a.team-name:hover {
+  color: var(--primary);
+}
+.team-role {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.team-bio {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+/* Research */
+.research {
+  padding: 72px 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.research-header {
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+.research-header h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.research-header p {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  line-height: 1.65;
+}
+.papers {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.paper-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+.paper-journal {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 3px 10px;
+  border-radius: var(--r-sm);
+  margin-bottom: 10px;
+}
+.paper-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.paper-authors {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+}
+.paper-note {
+  font-size: 0.855rem;
+  color: var(--ink-muted);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+.paper-link {
+  font-size: 0.84rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.paper-link:hover { text-decoration: underline; }
+
+/* CTA */
+.about-cta { padding: 72px 0 88px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="container">
+    <span class="section-label">About</span>
+    <h1>We've been thinking about this problem since 2018.</h1>
+    <p class="about-hero-sub">Stream wasn't built by engineers who interviewed some doctors. It was built by physicians who spent years researching why the medical record fails — and what to do about it.</p>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="origin">
+  <div class="container">
+    <div class="origin-prose reveal">
+      <p>In 2018, three medical students had a simple idea: automate the discharge summary. Every physician knows the feeling — a patient ready to leave, a dense chart to synthesize, a document to write that no one will read the way you wrote it. We wanted to fix that. The tools weren't ready. The NLP models of the time couldn't reliably extract clinical meaning from free text. So we published research on extracting clinical meaning from free text, presented it at a conference, and kept going.</p>
+      <p>What we built next was more revealing than we expected. Working with Boston Medical Center, we trained a machine learning model on radiology reports — teaching it to identify newly discovered adrenal incidentalomas and flag them for follow-up. What we discovered wasn't just that the model worked. It was that patients with incidental findings were routinely falling through the cracks, not because anyone was negligent, but because the medical record had no mechanism for longitudinal tracking. It wasn't built for projects. It was built for notes.</p>
+      <p>That insight became the foundation for everything that followed. We published research showing that more than half of all text in a large academic health system's medical record was duplicated from prior notes — and the fraction was growing. We designed and built a prototype of what we called a "noteless" EMR: a system organized by medical problem rather than by date, author, or encounter. We published that work too. The vision was clear. The technology to make it practical for everyday primary care wasn't quite there yet.</p>
+      <p>Then LLMs changed what was possible. The AI scribe problem — the one we couldn't solve in 2018 — became tractable almost overnight. We had the research foundation, the clinical perspective, and years of thinking about what the chart should actually be. Stream is the product that came from all of that.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section style="padding: 56px 0;">
+  <div class="container">
+    <div class="phil-block reveal">
+      <span class="phil-label">The philosophy behind Stream</span>
+      <blockquote>"The note isn't the problem. The note as the only organizational unit for clinical knowledge — that's the problem. Every patient is a longitudinal project. Stream is built to manage it."</blockquote>
+      <div class="phil-byline">
+        <div class="phil-avatar">J</div>
+        <div>
+          <div class="phil-name">Jake Kantrowitz, MD</div>
+          <div class="phil-title">Co-Founder & CEO, River Records</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="container">
+    <div class="team-header reveal">
+      <span class="section-label">The team</span>
+      <h2>Physicians, engineers, and researchers — building the tool we always needed.</h2>
+    </div>
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <img class="team-avatar" src="/images/team/Jake.jpg" alt="Jacob Kantrowitz, MD">
+        <a href="https://www.linkedin.com/in/jake-kantrowitz/" target="_blank" rel="noopener" class="team-name">Jacob Kantrowitz, MD, PhD</a>
+        <div class="team-role">Co-Founder & CEO</div>
+        <div class="team-bio">Internist and primary care physician. Assistant Professor at Tufts University School of Medicine. Published researcher in clinical informatics and NLP.</div>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="/images/team/Jackson.jpg" alt="Jackson Steinkamp, MD">
+        <a href="https://www.linkedin.com/in/jackson-steinkamp-769193125/" target="_blank" rel="noopener" class="team-name">Jackson Steinkamp, MD</a>
+        <div class="team-role">Co-Founder & CTO</div>
+        <div class="team-bio">Internist and primary care physician. Lead researcher on EMR duplication and information chaos. Former resident at the University of Pennsylvania.</div>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="/images/team/Abhinav.jpg" alt="Abhinav Sharma, MD">
+        <a href="https://www.linkedin.com/in/abhinav-sharma-b37a107/" target="_blank" rel="noopener" class="team-name">Abhinav Sharma, MD</a>
+        <div class="team-role">Co-Founder</div>
+        <div class="team-bio">Family medicine physician. University of Toronto. Co-author on the foundational research behind Stream's problem-oriented approach.</div>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="/images/team/Derrick.jpg" alt="Derrick Chu, MD">
+        <a href="https://www.linkedin.com/in/derrick-chu-54b15899/" target="_blank" rel="noopener" class="team-name">Derrick Chu, MD, PhD</a>
+        <div class="team-role">Quality Assurance & Clinical Advisor</div>
+        <div class="team-bio">Practicing pediatrician. Brings frontline clinical perspective to product testing and quality assurance.</div>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="/images/team/Fyodor.jpg" alt="Fyodor (Teddy) Wolf">
+        <a href="https://www.linkedin.com/in/fyodor-wolf/" target="_blank" rel="noopener" class="team-name">Fyodor (Teddy) Wolf</a>
+        <div class="team-role">VP of Engineering</div>
+        <div class="team-bio">Leads engineering architecture and development. Core contributor to the Stream platform since its earliest builds.</div>
+      </div>
+      <div class="team-card">
+        <img class="team-avatar" src="/images/team/Peter.jpg" alt="Peter Smyrniotis">
+        <a href="https://www.linkedin.com/in/petersmyrniotis/" target="_blank" rel="noopener" class="team-name">Peter Smyrniotis</a>
+        <div class="team-role">Chief of Staff & Board Advisor</div>
+        <div class="team-bio">Operator and strategic advisor helping founders turn potential into traction. Works with funded startups at critical inflection points where clarity, speed, and execution all matter at once.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="research">
+  <div class="container">
+    <div class="research-header reveal">
+      <span class="section-label">Published research</span>
+      <h2>The work behind Stream.</h2>
+      <p>Our approach to documentation isn't a hypothesis — it's a body of peer-reviewed research developed over years of clinical informatics work.</p>
+    </div>
+    <div class="papers reveal">
+      <div class="paper-card">
+        <span class="paper-journal">JAMA Network Open · 2022</span>
+        <div class="paper-title">Prevalence and Sources of Duplicate Information in the Electronic Medical Record</div>
+        <div class="paper-authors">Steinkamp J, Kantrowitz JJ, Airan-Javia S</div>
+        <div class="paper-note">Analysis of 104 million clinical notes across 1.96 million patients — more than half of all text in the medical record was duplicated.</div>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/36156143/" target="_blank" rel="noopener" class="paper-link">View on PubMed →</a>
+      </div>
+      <div class="paper-card">
+        <span class="paper-journal">JMIR Formative Research · 2021</span>
+        <div class="paper-title">A Fully Collaborative, Noteless Electronic Medical Record Designed to Minimize Information Chaos</div>
+        <div class="paper-authors">Steinkamp J, Sharma A, Bala W, Kantrowitz JJ</div>
+        <div class="paper-note">Design and feasibility study that proved Stream's core concept — a chart organized by problem, not by note.</div>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/34751651/" target="_blank" rel="noopener" class="paper-link">View on PubMed →</a>
+      </div>
+      <div class="paper-card">
+        <span class="paper-journal">Journal of Medical Internet Research · 2021</span>
+        <div class="paper-title">Beyond Notes: Why It Is Time to Abandon an Outdated Documentation Paradigm</div>
+        <div class="paper-authors">Steinkamp J, Kantrowitz J, Sharma A, Bala W</div>
+        <div class="paper-note">The viewpoint paper that named the problem — a chart reconceptualized as a dynamic workspace organized by topic.</div>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/33877053/" target="_blank" rel="noopener" class="paper-link">View on PubMed →</a>
+      </div>
+      <div class="paper-card">
+        <span class="paper-journal">Applied Clinical Informatics · 2020</span>
+        <div class="paper-title">A Web Application for Adrenal Incidentaloma Identification, Tracking, and Management Using Machine Learning</div>
+        <div class="paper-authors">Bala W, Steinkamp J, Kantrowitz J, Sharma A et al.</div>
+        <div class="paper-note">The Boston Medical Center project — NLP-enabled clinical follow-up tracking deployed at a safety-net hospital.</div>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/32937677/" target="_blank" rel="noopener" class="paper-link">View on PubMed →</a>
+      </div>
+      <div class="paper-card">
+        <span class="paper-journal">Journal of Biomedical Informatics · 2019</span>
+        <div class="paper-title">Task definition, annotated dataset, and supervised natural language processing models for symptom extraction from unstructured clinical notes</div>
+        <div class="paper-authors">Kantrowitz J et al.</div>
+        <div class="paper-note">The first paper — NLP-based symptom extraction from clinical free text. The research that started it all.</div>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/31838210/" target="_blank" rel="noopener" class="paper-link">View on PubMed →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="about-cta">
+  <div class="container">
+    <div class="cta-dark reveal">
+      <h2>See the product the research built.<br><em>Built by physicians, for physicians.</em></h2>
+      <p>A 20-minute demo with a clinician who uses Stream daily. No pitch. Just the product.</p>
+      <div class="cta-dark-actions">
+        <a href="/book-demo" class="btn btn-white">Book a Demo →</a>
+      </div>
+      <p class="cta-dark-trust">hello@riverrecords.ai · We respond same day.</p>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</Page>
