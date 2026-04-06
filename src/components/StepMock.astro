@@ -1,0 +1,39 @@
+---
+const { header, flush = false } = Astro.props;
+---
+<div class="step-mock">
+  <div class="step-mock-hdr"><span class="step-mock-dot"></span>{header}</div>
+  <div class="step-mock-body" style={flush ? 'padding:0;' : ''}>
+    <slot />
+  </div>
+</div>
+
+<style>
+.step-mock {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.step-mock-hdr {
+  background: var(--surface-warm);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  font-size: 0.69rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.step-mock-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+.step-mock-body { padding: 18px; }
+</style>

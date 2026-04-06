@@ -1,5 +1,7 @@
 ---
 import Page from '../../layouts/Page.astro';
+import PhilBlock from '../../components/PhilBlock.astro';
+import CtaDark from '../../components/CtaDark.astro';
 ---
 <Page
   title="About — Stream by River Records"
@@ -199,17 +201,9 @@ a.team-name:hover {
 <!-- PHILOSOPHY -->
 <section style="padding: 56px 0;">
   <div class="container">
-    <div class="phil-block reveal">
-      <span class="phil-label">The philosophy behind Stream</span>
-      <blockquote>"The note isn't the problem. The note as the only organizational unit for clinical knowledge — that's the problem. Every patient is a longitudinal project. Stream is built to manage it."</blockquote>
-      <div class="phil-byline">
-        <div class="phil-avatar">J</div>
-        <div>
-          <div class="phil-name">Jake Kantrowitz, MD</div>
-          <div class="phil-title">Co-Founder & CEO, River Records</div>
-        </div>
-      </div>
-    </div>
+    <PhilBlock label="The philosophy behind Stream" name="Jake Kantrowitz, MD" title="Co-Founder & CEO, River Records">
+      "The note isn't the problem. The note as the only organizational unit for clinical knowledge — that's the problem. Every patient is a longitudinal project. Stream is built to manage it."
+    </PhilBlock>
   </div>
 </section>
 
@@ -312,14 +306,10 @@ a.team-name:hover {
 <!-- FINAL CTA -->
 <section class="about-cta">
   <div class="container">
-    <div class="cta-dark reveal">
-      <h2>See the product the research built.<br><em>Built by physicians, for physicians.</em></h2>
-      <p>A 20-minute demo with a clinician who uses Stream daily. No pitch. Just the product.</p>
-      <div class="cta-dark-actions">
-        <a href="/book-demo" class="btn btn-white">Book a Demo →</a>
-      </div>
-      <p class="cta-dark-trust">hello@riverrecords.ai · We respond same day.</p>
-    </div>
+    <CtaDark primaryHref="/book-demo" primaryLabel="Book a Demo →">
+      See the product the research built.<br><em>Built by physicians, for physicians.</em>
+      <Fragment slot="body">A 20-minute demo with a clinician who uses Stream daily. No pitch. Just the product.</Fragment>
+    </CtaDark>
   </div>
 </section>
 

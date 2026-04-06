@@ -1,0 +1,10 @@
+---
+const { items } = Astro.props;
+---
+<div class="proof-strip">
+  <div class="proof-strip-inner">
+    {items.map((item: string) => (
+      <div class="proof-item"><div class="proof-check"></div>{item}</div>
+    ))}
+  </div>
+</div>

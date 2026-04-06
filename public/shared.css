@@ -49,6 +49,8 @@
   --error:          var(--brand-error-50,      #DC362E);
   --error-light:    var(--brand-error-10,      #FDF5F5);
   --gold:           var(--brand-secondary-80,  #CD7908);
+  --freed-red:      #C94040;
+  --freed-red-light:#fef2f2;
 
   /* Typography */
   --font-serif: 'Instrument Serif', Georgia, serif;

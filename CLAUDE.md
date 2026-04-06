@@ -19,6 +19,11 @@ This site uses Astro (static output mode).
 Edit the component file in src/components/
 Change once — updates every page automatically.
 
+## Specialty pages
+Specialty-specific landing pages live at /for/[specialty] (e.g. /for/primary-care).
+All follow the same template structure as /for/primary-care/index.astro:
+Hero → Pain cards → Philosophy → How it works (with widgets) → Features grid → Testimonials → Pricing callout → CTA.
+
 ## Project overview
 Static site for riverrecords.ai / Stream by River Records.
 Deployed via Cloudflare Pages from this GitHub repo.

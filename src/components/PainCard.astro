@@ -1,0 +1,36 @@
+---
+const { icon, title, body } = Astro.props;
+---
+<div class="pain-card">
+  <div class="pain-icon">{icon}</div>
+  <h3>{title}</h3>
+  <p>{body}</p>
+</div>
+
+<style>
+.pain-card {
+  background: var(--freed-red-light);
+  border: 1px solid rgba(201,64,64,0.15);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.pain-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--freed-red);
+  opacity: 0.45;
+}
+.pain-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  background: rgba(201,64,64,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+.pain-card h3 { font-size: 0.925rem; font-weight: 600; color: var(--ink); margin-bottom: 6px; font-family: var(--font-sans); }
+.pain-card p  { font-size: 0.855rem; color: var(--ink-muted); line-height: 1.55; }
+</style>

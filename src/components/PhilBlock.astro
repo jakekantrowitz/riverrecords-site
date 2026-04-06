@@ -1,0 +1,16 @@
+---
+const { label, name, title } = Astro.props;
+const initial = name ? name.charAt(0) : 'R';
+---
+<div class="phil-block reveal">
+  <span class="phil-label">{label}</span>
+  <blockquote><slot /></blockquote>
+  <div class="phil-byline">
+    <div class="phil-avatar">{initial}</div>
+    <div>
+      <div class="phil-name">{name}</div>
+      <div class="phil-title">{title}</div>
+    </div>
+  </div>
+  <slot name="after" />
+</div>

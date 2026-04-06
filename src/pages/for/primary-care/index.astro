@@ -1,0 +1,312 @@
+---
+import Page from '../../../layouts/Page.astro';
+import HeroSection from '../../../components/HeroSection.astro';
+import ProofStrip from '../../../components/ProofStrip.astro';
+import PainCard from '../../../components/PainCard.astro';
+import PhilBlock from '../../../components/PhilBlock.astro';
+import StepMock from '../../../components/StepMock.astro';
+import FeatureCell from '../../../components/FeatureCell.astro';
+import TestimonialCard from '../../../components/TestimonialCard.astro';
+import CtaDark from '../../../components/CtaDark.astro';
+---
+<Page
+  title="AI Scribe for Primary Care & Family Medicine — Stream"
+  description="Stream is the AI medical scribe built for primary care. Faster notes, organized by problem, with automatic task tracking so nothing falls through the cracks. 30-day free trial.">
+
+<style>
+/* Pain section */
+.pain { padding: 72px 0 60px; }
+.pain h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.7rem);
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.pain-lead { font-size: 1rem; color: var(--ink-muted); max-width: 580px; line-height: 1.65; margin-bottom: 36px; }
+.pain-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+
+/* How it works */
+.how { padding: 88px 0 72px; }
+.how-header { max-width: 700px; margin-bottom: 56px; }
+.how-header h2 {
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.how-header h2 em { font-style: italic; color: var(--primary); }
+.how-header p { font-size: 1rem; color: var(--ink-muted); line-height: 1.65; }
+.how-steps { display: flex; flex-direction: column; }
+.how-step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  padding: 60px 0;
+  border-top: 1px solid var(--border);
+}
+.how-step:last-child { border-bottom: 1px solid var(--border); }
+.how-step.reverse .how-step-visual { order: -1; }
+.how-step-num {
+  font-family: var(--font-serif);
+  font-size: 0.82rem;
+  color: var(--primary);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+.how-step h3 {
+  font-size: clamp(1.45rem, 2.4vw, 1.85rem);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.how-step p { font-size: 0.975rem; color: var(--ink-muted); line-height: 1.68; margin-bottom: 16px; }
+.how-step-aside {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  font-style: italic;
+  padding-left: 14px;
+  border-left: 2px solid var(--border-strong);
+  line-height: 1.55;
+}
+
+/* Features */
+.features {
+  padding: 80px 0 72px;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.features-header {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 48px;
+}
+.features-header h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+/* Testimonials */
+.testimonials { padding: 64px 0 52px; }
+.testimonials-header { margin-bottom: 40px; }
+.testimonials-header h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+.testimonials-header p { font-size: 1rem; color: var(--ink-muted); }
+.tgrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+
+/* Pricing callout */
+.pricing-callout { padding: 64px 0; }
+.pricing-card {
+  background: var(--white);
+  border: 1.5px solid rgba(36,89,158,0.4);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  max-width: 480px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.pricing-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+}
+.pricing-card h2 { font-size: 2rem; color: var(--ink); margin-bottom: 10px; }
+.pricing-card p { font-size: 1rem; color: var(--ink-muted); line-height: 1.6; margin-bottom: 24px; }
+.pricing-card .btn-primary-lg { max-width: 360px; width: 100%; display: block; margin: 0 auto; text-align: center; }
+.pricing-small { font-size: 0.78rem; color: var(--ink-faint); margin-top: 12px; }
+
+/* Final CTA */
+.final-cta { padding: 72px 0 88px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pain-cards { grid-template-columns: 1fr; }
+  .how-step { grid-template-columns: 1fr; gap: 28px; }
+  .how-step.reverse .how-step-visual { order: 0; }
+  .features-grid { grid-template-columns: repeat(2,1fr); }
+  .tgrid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 640px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .tgrid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HERO -->
+<HeroSection
+  eyebrow="Built for Primary Care & Family Medicine"
+  sub="Stream writes your notes, organizes your chart by medical problem, and tracks every open loop — so you leave the office on time and sleep better at night."
+  secondaryHref="/book-demo"
+  secondaryLabel="Book a Demo"
+  trustItems={["No credit card required", "30-day free trial", "$59/month for your first year", "HIPAA Compliant"]}
+>
+  The AI scribe that remembers<br><em>everything you can't afford to forget.</em>
+</HeroSection>
+
+<!-- PROOF STRIP -->
+<ProofStrip items={["Built by primary care physicians", "Works with any EHR", "30-day free trial", "HIPAA Compliant"]} />
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="container">
+    <span class="section-label reveal">The primary care burden</span>
+    <h2 class="reveal">You didn't go into medicine to spend<br>your evenings documenting.</h2>
+    <p class="pain-lead reveal">Primary care carries the highest documentation burden in medicine. Complex patients, short visits, and a chart that was never designed for longitudinal care. Stream is built specifically for this.</p>
+    <div class="pain-cards reveal">
+      <PainCard icon="🕐" title="Pajama time is stealing your life" body="The average primary care physician spends 2+ hours per day on documentation after clinic ends. That's time you're not getting back — unless the notes write themselves." />
+      <PainCard icon="🔄" title="Open loops keep you up at night" body="The referral you sent but never heard back on. The abnormal lab that came back while you were seeing patients. The follow-up that slipped between visits. Primary care runs on trust that nothing falls through the cracks." />
+      <PainCard icon="📋" title="Every visit starts with re-reading your own chart" body="Your patient has 8 active problems and you have 12 minutes. Flipping through past notes to remember where you left off isn't clinical care — it's archaeology." />
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section style="padding: 56px 0;">
+  <div class="container">
+    <PhilBlock label="Why primary care needs something different" name="Jake Kantrowitz, MD" title="Primary Care Physician · Co-Founder, River Records">
+      "Primary care is the only specialty where you're expected to manage thirty chronic conditions, coordinate care across ten specialists, and document everything — in twelve minutes. The EHR was never built for that. Stream is."
+    </PhilBlock>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="container">
+    <div class="how-header reveal">
+      <span class="section-label">How it works</span>
+      <h2>Designed around how primary care actually works.</h2>
+      <p>Not how the EHR thinks it works.</p>
+    </div>
+    <div class="how-steps">
+
+      <div class="how-step reveal">
+        <div class="how-step-copy">
+          <div class="how-step-num">Step 01 — Before the visit</div>
+          <h3>Walk in knowing exactly where you left off.</h3>
+          <p>Stream's problem-oriented chart gives you an instant summary of every active problem before the patient walks in. Medications, recent changes, open tasks, last assessment — all organized by problem, not buried by date. Pre-charting takes seconds, not minutes.</p>
+          <p class="how-step-aside">Coming soon: Clinical Readiness view — a pre-visit brief that surfaces what matters most for today's encounter.</p>
+        </div>
+        <div class="how-step-visual">
+          <StepMock header="Problem Summary" flush>
+            <div id="pc-problem-summary"></div>
+          </StepMock>
+        </div>
+      </div>
+
+      <div class="how-step reverse reveal">
+        <div class="how-step-copy">
+          <div class="how-step-num">Step 02 — During the visit</div>
+          <h3>Speak naturally. Stream handles the rest.</h3>
+          <p>Record your encounter or dictate as you go. Stream transcribes in real time, structures the note by problem, and updates your chart automatically. Your voice sets the context — Stream writes the note, suggests the codes, and generates the follow-up tasks.</p>
+          <p class="how-step-aside">Supports 22 languages. Works ambient or with direct dictation. Customizable templates for your documentation style.</p>
+        </div>
+        <div class="how-step-visual">
+          <StepMock header="Recording in progress">
+            <div id="pc-waveform"></div>
+          </StepMock>
+        </div>
+      </div>
+
+      <div class="how-step reveal">
+        <div class="how-step-copy">
+          <div class="how-step-num">Step 03 — After the visit</div>
+          <h3>Leave the office with nothing hanging over you.</h3>
+          <p>Every task is captured, every loop is tracked, every referral is documented. Stream generates your follow-up list automatically from the note — so the last patient of the day gets the same attention as the first.</p>
+          <p class="how-step-aside">Coming soon: referral loop tracking and inter-office communication — so you always know what happened after the handoff.</p>
+        </div>
+        <div class="how-step-visual">
+          <StepMock header="Auto-Generated Tasks" flush>
+            <div id="pc-task-list"></div>
+          </StepMock>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <span class="section-label">Built for your workflow</span>
+      <h2>Every feature earns its place in a primary care day.</h2>
+    </div>
+    <div class="features-grid reveal">
+      <FeatureCell icon="🗂️" title="Problem-Oriented Chart" body="Every encounter updates a living chart organized by medical problem — hypertension, diabetes, back pain, all of it. Pick up exactly where you left off, every time." />
+      <FeatureCell icon="🎙️" title="Real-Time AI Scribe" body="Ambient recording or direct dictation. Stream writes a complete, structured note while you focus on your patient — not your screen." />
+      <FeatureCell icon="✅" title="Automatic Task Tracking" body="Follow-up tasks are extracted from every note automatically. Labs to recheck, referrals to send, medications to review — nothing gets lost between visits." />
+      <FeatureCell icon="💻" title="ICD & CPT Coding" body="Diagnosis and procedure codes suggested at the point of care. Capture the right codes without slowing down or switching screens." />
+      <FeatureCell icon="📁" title="External Record Ingestion" body="Import outside records — fax, PDF, or upload. Stream summarizes and links them to the relevant problem so outside information becomes part of your chart, not a separate attachment." />
+      <FeatureCell icon="📝" title="Customizable Templates" body="Build note templates that match your style, your specialty, and your EHR's requirements — or use our primary care defaults and start in minutes." />
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container">
+    <div class="testimonials-header reveal">
+      <span class="section-label">What clinicians say</span>
+      <h2>Built by physicians. Trusted by clinicians.</h2>
+      <p>Real feedback from practicing primary care clinicians.</p>
+    </div>
+    <div class="tgrid reveal">
+      <TestimonialCard initials="YJ" name="Yvonne Joy" title="Owner & CEO, Freedom Primary Care" quote="River Records is a lifesaver. It slashes my documentation burden and boosts productivity in primary care." />
+      <TestimonialCard initials="AB" name="Anatoli Berezovsky, MD" title="Owner & CEO, Mila Family Health" quote="Stream focuses on the entire patient — perfect for DPC where progress matters more than individual encounters." />
+      <TestimonialCard initials="SD" name="Spencer Dorn, MD" title="Vice Chair & Professor of Medicine, UNC" quote="River Records' approach to clinical documentation matches how we think clinically. I love the concept." />
+    </div>
+  </div>
+</section>
+
+<!-- PRICING CALLOUT -->
+<section class="pricing-callout">
+  <div class="container">
+    <div class="pricing-card reveal">
+      <h2>$59/month for your first year.</h2>
+      <p>Unlimited visits. Works with any EHR. 30-day free trial, no credit card required.</p>
+      <a href="https://stream.riverrecords.ai/onboard/stream-pro" class="btn btn-primary-lg">Start Free Trial →</a>
+      <div class="pricing-small">Then $149/month. Lock in this rate forever.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <CtaDark secondaryHref="/book-demo" secondaryLabel="Talk to a clinician first">
+      Built for the way primary care actually works.<br><em>Not the way the EHR thinks it does.</em>
+      <Fragment slot="body">Start your 30-day free trial. No credit card. Works with the EHR you already have.</Fragment>
+    </CtaDark>
+  </div>
+</section>
+
+<script is:inline>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+document.addEventListener('DOMContentLoaded', function() {
+  StreamWidgets.ProblemSummaryCard('#pc-problem-summary');
+  StreamWidgets.WaveformWidget('#pc-waveform', { autoStart: true });
+  StreamWidgets.TaskListWidget('#pc-task-list');
+});
+</script>
+
+</Page>

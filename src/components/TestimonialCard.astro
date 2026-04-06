@@ -1,0 +1,14 @@
+---
+const { initials, name, title, quote } = Astro.props;
+---
+<div class="tcard">
+  <div class="tcard-stars">★★★★★</div>
+  <blockquote>"{quote}"</blockquote>
+  <div class="tcard-author">
+    <div class="tcard-avatar">{initials}</div>
+    <div>
+      <div class="tcard-name">{name}</div>
+      <div class="tcard-title">{title}</div>
+    </div>
+  </div>
+</div>

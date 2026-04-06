@@ -1,0 +1,18 @@
+---
+const {
+  primaryHref = 'https://stream.riverrecords.ai/onboard/stream-pro',
+  primaryLabel = 'Start Free Trial →',
+  secondaryHref,
+  secondaryLabel,
+  trust = 'hello@riverrecords.ai · We respond same day.',
+} = Astro.props;
+---
+<div class="cta-dark reveal">
+  <h2><slot /></h2>
+  <p><slot name="body" /></p>
+  <div class="cta-dark-actions">
+    <a href={primaryHref} class="btn btn-white">{primaryLabel}</a>
+    {secondaryHref && <a href={secondaryHref} class="btn btn-outline-white">{secondaryLabel}</a>}
+  </div>
+  <p class="cta-dark-trust">{trust}</p>
+</div>
