@@ -24,6 +24,10 @@ Specialty-specific landing pages live at /for/[specialty] (e.g. /for/primary-car
 All follow the same template structure as /for/primary-care/index.astro:
 Hero → Pain cards → Philosophy → How it works (with widgets) → Features grid → Testimonials → Pricing callout → CTA.
 
+Current specialty pages:
+- /for/primary-care — primary care & family medicine
+- /for/snf — SNF, LTC, post-acute care clinicians. Primary CTA is Book a Demo (not Start Trial) — discharge summary workflow is best shown live.
+
 ## Project overview
 Static site for riverrecords.ai / Stream by River Records.
 Deployed via Cloudflare Pages from this GitHub repo.
