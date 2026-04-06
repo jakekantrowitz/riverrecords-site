@@ -1,0 +1,137 @@
+---
+import Page from '../layouts/Page.astro';
+---
+<Page
+  title="Page Not Found — Stream by River Records"
+  description="The page you're looking for doesn't exist.">
+
+<style>
+.not-found {
+  padding: 120px 0;
+  text-align: center;
+}
+.not-found h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.not-found p {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.not-found-code {
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  color: var(--primary);
+  opacity: 0.15;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.search-box {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: left;
+}
+#site-search {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--r-md);
+  background: var(--white);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+#site-search:focus {
+  border-color: var(--primary);
+}
+#site-search::placeholder {
+  color: var(--ink-faint);
+}
+.search-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-top: 6px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  text-decoration: none;
+  transition: border-color 0.1s, background 0.1s;
+}
+.search-result:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+.search-result-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.search-result-url {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
+.search-empty {
+  padding: 12px 16px;
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+  text-align: center;
+}
+</style>
+
+<section class="not-found">
+  <div class="container">
+    <div class="not-found-code">404</div>
+    <h1>This page doesn't exist.</h1>
+    <p>The page you're looking for may have been moved or removed.<br>Let's get you back on track.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;">
+      <a href="/" class="btn btn-primary-lg">Back to Home</a>
+      <a href="/book-demo" class="btn btn-outline">Book a Demo</a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="site-search" placeholder="Search pages..." autocomplete="off" />
+      <div id="search-results"></div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+(function() {
+  var pages = [
+    { title: "Home", url: "/", keywords: "stream river records ai scribe medical documentation problem-oriented" },
+    { title: "About", url: "/about", keywords: "about team research publications history origin" },
+    { title: "Book a Demo", url: "/book-demo", keywords: "demo book meeting calendly walkthrough" },
+    { title: "Primary Care", url: "/for/primary-care", keywords: "primary care family medicine pcp fm internist" },
+    { title: "SNF & Long-Term Care", url: "/for/snf", keywords: "snf skilled nursing long-term care ltc post-acute discharge summary" },
+    { title: "Stream vs Freed AI", url: "/comparison/freedai", keywords: "freed comparison vs alternative pricing" },
+  ];
+
+  var input = document.getElementById('site-search');
+  var results = document.getElementById('search-results');
+
+  input.addEventListener('input', function() {
+    var q = this.value.toLowerCase().trim();
+    if (!q) { results.innerHTML = ''; return; }
+    var matches = pages.filter(function(p) {
+      return p.title.toLowerCase().indexOf(q) !== -1 || p.keywords.indexOf(q) !== -1;
+    });
+    if (matches.length === 0) {
+      results.innerHTML = '<div class="search-empty">No pages found</div>';
+    } else {
+      results.innerHTML = matches.map(function(p) {
+        return '<a href="' + p.url + '" class="search-result"><span class="search-result-title">' + p.title + '</span><span class="search-result-url">' + p.url + '</span></a>';
+      }).join('');
+    }
+  });
+})();
+</script>
+
+</Page>
