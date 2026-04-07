@@ -1,19 +1,34 @@
 ---
-const { icon, title, body } = Astro.props;
+const { icon, title, body, href } = Astro.props;
 ---
-<div class="feat-cell">
-  <div class="feat-icon">{icon}</div>
-  <h3>{title}</h3>
-  <p>{body}</p>
-</div>
+{href ? (
+  <a class="feat-cell feat-cell-link" href={href}>
+    <div class="feat-icon">{icon}</div>
+    <h3>{title}</h3>
+    <p>{body}</p>
+    <span class="feat-link-arrow">Learn more →</span>
+  </a>
+) : (
+  <div class="feat-cell">
+    <div class="feat-icon">{icon}</div>
+    <h3>{title}</h3>
+    <p>{body}</p>
+  </div>
+)}
 
 <style>
 .feat-cell {
   background: var(--white);
-  padding: 30px 26px;
-  transition: background 0.15s;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  transition: box-shadow 0.15s, transform 0.15s;
 }
-.feat-cell:hover { background: var(--surface); }
+.feat-cell:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.feat-cell-link {
+  text-decoration: none;
+  display: block;
+}
 .feat-icon {
   width: 40px; height: 40px;
   border-radius: 9px;
@@ -25,4 +40,11 @@ const { icon, title, body } = Astro.props;
 }
 .feat-cell h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 7px; line-height: 1.3; font-family: var(--font-sans); }
 .feat-cell p  { font-size: 0.855rem; color: var(--ink-muted); line-height: 1.6; }
+.feat-link-arrow {
+  font-size: 0.78rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin-top: 10px;
+  display: inline-block;
+}
 </style>

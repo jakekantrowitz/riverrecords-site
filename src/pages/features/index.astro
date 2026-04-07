@@ -1,0 +1,121 @@
+---
+import Page from '../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+
+const allFeatures = (await getCollection('features', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+<Page
+  title="Features — Stream by River Records"
+  description="Explore every feature of Stream: problem-oriented charting, AI scribe, task management, record ingestion, templates, and more.">
+
+<style>
+.features-hero {
+  padding: 72px 0 48px;
+  text-align: center;
+}
+.features-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.features-hero p {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.features-section {
+  padding: 0 0 88px;
+}
+/* .features-grid — styles in shared.css */
+.feature-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+.feature-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.feature-card-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+}
+.feature-card-desc {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  flex: 1;
+  margin-bottom: 14px;
+}
+.feature-card-link {
+  font-size: 0.82rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin-top: auto;
+}
+.feature-card-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.feature-card-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+/* Responsive .features-grid — in shared.css */
+</style>
+
+<section class="features-hero">
+  <div class="container">
+    <span class="section-label">Features</span>
+    <h1>Everything Stream does.</h1>
+    <p>One platform for clinical documentation, task tracking, record ingestion, and problem-oriented charting. Built by physicians for physicians.</p>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="container">
+    <div class="features-grid">
+      {allFeatures.map((feature) => {
+        const hasLink = feature.data.hasPage;
+        const Tag = hasLink ? 'a' : 'div';
+        const linkProps = hasLink ? { href: `/features/${feature.data.slug}` } : {};
+        return (
+          <a href={hasLink ? `/features/${feature.data.slug}` : undefined} class="feature-card" style={!hasLink ? 'cursor:default;' : ''}>
+            {feature.data.tags.length > 0 && (
+              <div class="feature-card-tags">
+                {feature.data.tags.slice(0, 2).map((tag: string) => (
+                  <span class="feature-card-tag">{tag}</span>
+                ))}
+              </div>
+            )}
+            <div class="feature-card-name">{feature.data.name}</div>
+            <div class="feature-card-desc">{feature.data.description}</div>
+            {hasLink && <span class="feature-card-link">Learn more →</span>}
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+</Page>

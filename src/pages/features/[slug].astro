@@ -1,0 +1,18 @@
+---
+import { getCollection, render } from 'astro:content';
+import FeaturePage from '../../layouts/FeaturePage.astro';
+
+export async function getStaticPaths() {
+  const features = await getCollection('features', ({ data }) => data.hasPage && !data.draft);
+  return features.map((feature) => ({
+    params: { slug: feature.data.slug },
+    props: { feature },
+  }));
+}
+
+const { feature } = Astro.props;
+const { Content } = await render(feature);
+---
+<FeaturePage frontmatter={feature.data}>
+  <Content />
+</FeaturePage>
