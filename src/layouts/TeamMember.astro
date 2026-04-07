@@ -1,0 +1,185 @@
+---
+import Page from './Page.astro';
+import { getCollection } from 'astro:content';
+
+const { name, role, photo, linkedin, bio = '', authorMatch } = Astro.props;
+
+// Find blog posts by this author (fuzzy match on name)
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const authorPosts = allPosts
+  .filter(post => {
+    const postAuthor = post.data.author.toLowerCase();
+    return authorMatch.some((match: string) => postAuthor.includes(match.toLowerCase()));
+  })
+  .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+---
+<Page
+  title={`${name} — Stream by River Records`}
+  description={bio ? bio.slice(0, 155) : `${name} — ${role} at River Records.`}>
+
+<style>
+.team-profile {
+  padding: 72px 0 48px;
+}
+.team-profile-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  max-width: 760px;
+  align-items: start;
+}
+.team-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+.team-info h1 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.team-role {
+  font-size: 0.95rem;
+  color: var(--primary);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.team-bio {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  line-height: 1.72;
+  margin-bottom: 20px;
+}
+.team-bio p {
+  margin-bottom: 12px;
+}
+.team-linkedin {
+  font-size: 0.875rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.team-linkedin:hover { text-decoration: underline; }
+.team-back {
+  display: inline-block;
+  font-size: 0.84rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+.team-back:hover { text-decoration: underline; }
+
+/* Posts section */
+.team-posts {
+  padding: 48px 0 88px;
+  border-top: 1px solid var(--border);
+}
+.team-posts-header {
+  margin-bottom: 32px;
+}
+.team-posts-header h2 {
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin-bottom: 6px;
+  font-family: var(--font-sans);
+}
+.team-posts-header p {
+  font-size: 0.9rem;
+  color: var(--ink-faint);
+}
+.team-posts-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.team-post-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 20px;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+.team-post-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.team-post-card h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+}
+.team-post-card p {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 12px;
+}
+.team-post-date {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .team-posts-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .team-profile-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .team-bio { text-align: left; }
+  .team-posts-list { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="team-profile">
+  <div class="container">
+    <a href="/about" class="team-back">← Back to About</a>
+    <div class="team-profile-inner">
+      <img class="team-photo" src={photo} alt={name} />
+      <div class="team-info">
+        <h1>{name}</h1>
+        <div class="team-role">{role}</div>
+        <div class="team-bio">
+          <slot />
+        </div>
+        {linkedin && <a href={linkedin} target="_blank" rel="noopener" class="team-linkedin">LinkedIn →</a>}
+      </div>
+    </div>
+  </div>
+</section>
+
+{authorPosts.length > 0 && (
+  <section class="team-posts">
+    <div class="container">
+      <div class="team-posts-header">
+        <h2>Posts by {name.split(',')[0].split(' ')[0]}</h2>
+        <p>{authorPosts.length} article{authorPosts.length !== 1 ? 's' : ''}</p>
+      </div>
+      <div class="team-posts-list">
+        {authorPosts.slice(0, 9).map((post) => {
+          const dateStr = new Date(post.data.publishDate).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'short', day: 'numeric',
+          });
+          return (
+            <a href={`/blog/${post.id}`} class="team-post-card">
+              <h3>{post.data.title}</h3>
+              <p>{post.data.description}</p>
+              <span class="team-post-date">{dateStr}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+)}
+
+</Page>

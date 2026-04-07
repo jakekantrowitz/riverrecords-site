@@ -11,12 +11,5 @@
 /pricing  /#pricing  301
 /faq  /  301
 
-# Old team page redirects
-/team/jake-kantrowitz  /about  301
-/team/jackson-steinkamp  /about  301
-/team/abhinav-sharma  /about  301
+# Old team page redirects (only for members no longer on team)
 /team/alex-butler  /about  301
-/team/derrick-chu  /about  301
-/team/fyodor-wolf  /about  301
-/team/peter-smyrniotis  /about  301
-/team/*  /about  301
