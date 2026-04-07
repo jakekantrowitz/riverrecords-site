@@ -1,0 +1,211 @@
+---
+import Base from './Base.astro';
+import OfferBanner from '../components/OfferBanner.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const { frontmatter } = Astro.props;
+const title = frontmatter.seoTitle || frontmatter.title;
+const description = frontmatter.seoDescription || frontmatter.description;
+const dateStr = new Date(frontmatter.publishDate).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<Base title={`${title} — Stream by River Records`} description={description}>
+  <OfferBanner />
+  <Nav />
+  <main>
+    <article class="blog-post">
+      <div class="container">
+        <div class="blog-post-header">
+          <a href="/blog" class="blog-back">← Back to Blog</a>
+          {frontmatter.tags && frontmatter.tags.length > 0 && (
+            <div class="blog-tags">
+              {frontmatter.tags.map((tag: string) => (
+                <span class="blog-tag">{tag}</span>
+              ))}
+            </div>
+          )}
+          <h1>{frontmatter.title}</h1>
+          <p class="blog-meta">
+            <span>{frontmatter.author}</span>
+            <span class="blog-meta-dot">·</span>
+            <time datetime={frontmatter.publishDate.toISOString()}>{dateStr}</time>
+            {frontmatter.readTime && (
+              <>
+                <span class="blog-meta-dot">·</span>
+                <span>{frontmatter.readTime} min read</span>
+              </>
+            )}
+          </p>
+        </div>
+        <div class="blog-post-body">
+          <slot />
+        </div>
+        <div class="blog-post-footer">
+          <div class="blog-cta-card">
+            <h3>Try Stream free for 30 days.</h3>
+            <p>The AI medical scribe with memory. Problem-oriented notes, automatic tasks, and a chart that gets smarter with every visit.</p>
+            <a href="https://stream.riverrecords.ai/onboard/stream-pro" class="btn btn-primary-lg">Start Free Trial →</a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+.blog-post {
+  padding: 48px 0 88px;
+}
+.blog-post-header {
+  max-width: 720px;
+  margin: 0 auto 40px;
+}
+.blog-back {
+  display: inline-block;
+  font-size: 0.84rem;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.blog-back:hover { text-decoration: underline; }
+.blog-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.blog-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.blog-post-header h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--ink);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.blog-meta {
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.blog-meta-dot {
+  color: var(--border-strong);
+}
+.blog-post-body {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.78;
+  color: var(--ink-muted);
+}
+.blog-post-body :global(h2) {
+  font-size: 1.5rem;
+  color: var(--ink);
+  margin-top: 40px;
+  margin-bottom: 16px;
+  font-family: var(--font-serif);
+}
+.blog-post-body :global(h3) {
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-top: 32px;
+  margin-bottom: 12px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+.blog-post-body :global(p) {
+  margin-bottom: 20px;
+}
+.blog-post-body :global(ul),
+.blog-post-body :global(ol) {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+.blog-post-body :global(li) {
+  margin-bottom: 8px;
+}
+.blog-post-body :global(blockquote) {
+  border-left: 3px solid var(--primary);
+  padding-left: 20px;
+  margin: 24px 0;
+  font-style: italic;
+  color: var(--ink);
+}
+.blog-post-body :global(a) {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.blog-post-body :global(a:hover) {
+  text-decoration: underline;
+}
+.blog-post-body :global(img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+  margin: 24px 0;
+}
+.blog-post-body :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 0.925rem;
+}
+.blog-post-body :global(th),
+.blog-post-body :global(td) {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+.blog-post-body :global(th) {
+  background: var(--surface);
+  font-weight: 600;
+  color: var(--ink);
+}
+.blog-post-body :global(strong) {
+  color: var(--ink);
+  font-weight: 600;
+}
+.blog-post-footer {
+  max-width: 720px;
+  margin: 56px auto 0;
+}
+.blog-cta-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  text-align: center;
+}
+.blog-cta-card h3 {
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+}
+.blog-cta-card p {
+  font-size: 0.925rem;
+  color: var(--ink-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.blog-cta-card .btn-primary-lg {
+  display: inline-block;
+}
+</style>

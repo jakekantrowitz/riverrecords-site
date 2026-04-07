@@ -1,10 +1,6 @@
 # Cloudflare Pages _redirects
 # Docs: https://developers.cloudflare.com/pages/configuration/redirects/
 
-# Blog — catch-all redirect to homepage until blog is rebuilt
-/blog/* / 301
-/blog   / 301
-
 # Old core page redirects (301 for SEO equity)
 /compare/freed-alternative  /comparison/freedai  301
 /compare/heidi-alternative  /  301

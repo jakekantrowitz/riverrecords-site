@@ -1,0 +1,254 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Page from '../../layouts/Page.astro';
+import BlogTagBar from '../../components/BlogTagBar.astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime());
+  return paginate(posts, { pageSize: 12 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const isFirstPage = page.currentPage === 1;
+
+// Only show featured on first page
+const featured = isFirstPage
+  ? page.data.filter((p: any) => p.data.featured)
+  : [];
+---
+<Page
+  title={isFirstPage ? "Blog — Stream by River Records" : `Blog — Page ${page.currentPage} — Stream by River Records`}
+  description="Insights on AI medical scribes, clinical documentation, problem-oriented charting, and the future of primary care technology.">
+
+<style>
+.blog-hero {
+  padding: 72px 0 48px;
+}
+.blog-hero h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.blog-hero p {
+  font-size: 1.05rem;
+  color: var(--ink-muted);
+  max-width: 540px;
+  line-height: 1.6;
+}
+.blog-grid {
+  padding: 0 0 88px;
+}
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.blog-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  transition: box-shadow 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+.blog-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.blog-card-body {
+  padding: 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.blog-card-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.blog-card-tag {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.blog-card h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  margin-bottom: 8px;
+  font-family: var(--font-sans);
+}
+.blog-card p {
+  font-size: 0.855rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+  margin-bottom: 14px;
+  flex: 1;
+}
+.blog-card-meta {
+  font-size: 0.76rem;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+.blog-card-meta-dot {
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+.blog-featured-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 20px;
+}
+.blog-section-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 40px 0;
+}
+.blog-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
+}
+.blog-pagination a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid var(--primary);
+  border-radius: var(--r-md);
+  transition: background 0.12s, color 0.12s;
+}
+.blog-pagination a:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+.blog-pagination-info {
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 900px) {
+  .blog-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .blog-list { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="blog-hero">
+  <div class="container">
+    <span class="section-label">Blog</span>
+    <h1>{isFirstPage ? 'Insights from the team behind Stream.' : `Blog — Page ${page.currentPage}`}</h1>
+    {isFirstPage && <p>On AI scribes, clinical documentation, problem-oriented charting, and building tools that work the way clinicians think.</p>}
+  </div>
+</section>
+
+<section class="blog-grid">
+  <div class="container">
+    <BlogTagBar />
+
+    {featured.length > 0 && isFirstPage && (
+      <>
+        <div class="blog-featured-label">Featured</div>
+        <div class="blog-list" style="margin-bottom:0;">
+          {featured.slice(0, 3).map((post: any) => {
+            const dateStr = new Date(post.data.publishDate).toLocaleDateString('en-US', {
+              year: 'numeric', month: 'short', day: 'numeric',
+            });
+            return (
+              <a href={`/blog/${post.id}`} class="blog-card">
+                <div class="blog-card-body">
+                  {post.data.tags.length > 0 && (
+                    <div class="blog-card-tags">
+                      {post.data.tags.slice(0, 2).map((tag: string) => (
+                        <span class="blog-card-tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                  <h2>{post.data.title}</h2>
+                  <p>{post.data.description}</p>
+                  <div class="blog-card-meta">
+                    <span>{post.data.author}</span>
+                    <div class="blog-card-meta-dot"></div>
+                    <span>{dateStr}</span>
+                    {post.data.readTime && (
+                      <>
+                        <div class="blog-card-meta-dot"></div>
+                        <span>{post.data.readTime} min</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+        <div class="blog-section-divider"></div>
+      </>
+    )}
+
+    <div class="blog-featured-label">{isFirstPage ? 'All Posts' : `Page ${page.currentPage}`}</div>
+    <div class="blog-list">
+      {page.data.map((post: any) => {
+        const dateStr = new Date(post.data.publishDate).toLocaleDateString('en-US', {
+          year: 'numeric', month: 'short', day: 'numeric',
+        });
+        return (
+          <a href={`/blog/${post.id}`} class="blog-card">
+            <div class="blog-card-body">
+              {post.data.tags.length > 0 && (
+                <div class="blog-card-tags">
+                  {post.data.tags.slice(0, 2).map((tag: string) => (
+                    <span class="blog-card-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              <div class="blog-card-meta">
+                <span>{post.data.author}</span>
+                <div class="blog-card-meta-dot"></div>
+                <span>{dateStr}</span>
+                {post.data.readTime && (
+                  <>
+                    <div class="blog-card-meta-dot"></div>
+                    <span>{post.data.readTime} min</span>
+                  </>
+                )}
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+
+    <div class="blog-pagination">
+      {page.url.prev && <a href={page.url.prev}>← Newer</a>}
+      <span class="blog-pagination-info">Page {page.currentPage} of {page.lastPage}</span>
+      {page.url.next && <a href={page.url.next}>Older →</a>}
+    </div>
+  </div>
+</section>
+
+</Page>
