@@ -116,6 +116,16 @@ const {
 .hero-trust-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-strong); }
 .hero-trust span { color: var(--ink-muted); font-weight: 500; }
 
+@media (max-width: 768px) {
+  .hero { padding: 48px 0 56px; }
+  .hero-eyebrow {
+    padding: 4px 12px;
+    font-size: 0.68rem;
+    max-width: 85vw;
+    margin-bottom: 20px;
+    letter-spacing: 0.03em;
+  }
+}
 @media (max-width: 640px) {
   .hero h1 { font-size: 2.2rem; }
   .hero-actions { flex-direction: column; width: 100%; }
