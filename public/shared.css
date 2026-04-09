@@ -11,6 +11,8 @@
 
 
 :root {
+  color-scheme: light only;
+
   /* Primary — product navy */
   --primary:        var(--brand-primary,       #24599e);
   --primary-dark:   var(--brand-primary-70,    #1B5093);
