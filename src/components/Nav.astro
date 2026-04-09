@@ -20,7 +20,7 @@
     </ul>
     <div class="nav-actions">
       <a href="https://stream.riverrecords.ai/login" class="nav-login">Log In</a>
-      <a href="https://stream.riverrecords.ai/onboard/stream-pro" class="btn btn-primary">Try it on your next visit</a>
+      <a href="https://stream.riverrecords.ai/onboard/stream-pro" class="btn btn-primary nav-cta"><span class="nav-cta-full">Try it on your next visit</span><span class="nav-cta-short">Try Stream</span></a>
     </div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -41,6 +41,11 @@
 </div>
 
 <style>
+  .nav-cta-short { display: none; }
+  @media (max-width: 1024px) {
+    .nav-cta-full { display: none; }
+    .nav-cta-short { display: inline; }
+  }
   .mobile-menu-label {
     font-size: 0.72rem;
     font-weight: 600;
