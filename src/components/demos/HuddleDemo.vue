@@ -1,7 +1,5 @@
 <template>
   <div class="huddle-demo">
-    <div class="demo-marker">DEMO - fake patient data - not a real chart</div>
-
     <!-- Patient header -->
     <div class="huddle-header">
       <h6 class="m-0">{{ patient.name }} <span class="patient-meta">{{ patient.age }}{{ patient.sex }} - {{ patient.pcp }}</span></h6>

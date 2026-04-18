@@ -1,7 +1,5 @@
 <template>
   <div class="encounter-demo">
-    <div class="demo-marker">DEMO - fake patient data - not a real chart</div>
-
     <!-- Format toggle -->
     <div class="format-bar">
       <span class="format-label">Note Style:</span>

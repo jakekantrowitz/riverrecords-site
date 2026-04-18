@@ -1,7 +1,5 @@
 <template>
   <div class="timeline-demo">
-    <div class="demo-marker">DEMO - fake patient data - not a real chart</div>
-
     <!-- Header -->
     <div class="timeline-header">
       <button v-if="showRecap" class="btn-back" @click="showRecap = false">&larr; Back to Timeline</button>

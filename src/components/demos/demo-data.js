@@ -37,7 +37,7 @@ export const HUDDLE_DATA = {
       resolved: false,
       tasks: [],
       lastAP: {
-        date: "4/15/2026",
+        date: "3/24/2026",
         provider: "Dr. J. Kantrowitz",
         assessment: "BP at goal on current regimen.",
         plan: ["Continue lisinopril 20mg daily", "No changes"],
@@ -52,7 +52,7 @@ export const HUDDLE_DATA = {
       resolved: false,
       tasks: [],
       lastAP: {
-        date: "4/15/2026",
+        date: "1/22/2026",
         provider: "Dr. J. Kantrowitz",
         assessment: "Improved on sertraline, patient reports good effect and no side effects.",
         plan: ["Continue sertraline 50mg daily", "Follow up at next visit"],

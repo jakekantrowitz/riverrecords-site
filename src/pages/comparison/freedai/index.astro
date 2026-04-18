@@ -130,10 +130,11 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
   background: var(--stream);
 }
 .freed-hero h1 {
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2.2rem, 4vw, 2.8rem);
   line-height: 1.15;
   color: var(--ink);
   margin-bottom: 18px;
+  max-width: 480px;
 }
 .freed-hero h1 em { font-style: italic; color: var(--stream); }
 .freed-hero-sub {
@@ -376,13 +377,17 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  grid-auto-rows: 1fr;
 }
 .freed-tour-card {
   background: var(--cream);
   border: 1px solid var(--rule);
   border-radius: 16px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
+.freed-tour-card-body { flex: 1; }
 .freed-tour-card-visual {
   min-height: 200px;
   padding: 16px;
@@ -621,7 +626,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 .freed-proof-stack {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 .freed-proof-mini {
   background: var(--cream);
@@ -669,7 +674,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   margin-bottom: 16px;
 }
-.freed-switcher h2 em { font-style: italic; color: rgba(250, 247, 240, 0.5); }
+.freed-switcher h2 em { font-style: italic; color: var(--accent-soft); }
 .freed-switcher-body {
   font-size: 1rem;
   color: rgba(250, 247, 240, 0.65);
@@ -864,6 +869,17 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
   flex-wrap: wrap;
 }
 
+/* Scroll reveal */
+.freed-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+.freed-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .freed-hero-grid { grid-template-columns: 1fr; }
@@ -935,7 +951,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </div>
 
 <!-- THESIS -->
-<section class="freed-thesis" id="thesis">
+<section class="freed-thesis freed-reveal" id="thesis">
   <div class="freed-container">
     <div class="freed-label">THE STRUCTURAL DIFFERENCE</div>
     <h2>Same visit. <em>Different note shape.</em></h2>
@@ -996,7 +1012,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </section>
 
 <!-- PRODUCT TOUR -->
-<section class="freed-tour" id="features">
+<section class="freed-tour freed-reveal" id="features">
   <div class="freed-container">
     <div class="freed-label">HOW STREAM ACTUALLY WORKS</div>
     <h2>Four things your scribe <em>doesn't</em> do.</h2>
@@ -1070,7 +1086,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </section>
 
 <!-- COMPARISON TABLE -->
-<section class="freed-compare" id="compare">
+<section class="freed-compare freed-reveal" id="compare">
   <div class="freed-container">
     <div class="freed-label">FEATURE BY FEATURE</div>
     <h2>Where Stream goes beyond the scribe.</h2>
@@ -1116,7 +1132,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </section>
 
 <!-- SOCIAL PROOF -->
-<section class="freed-proof">
+<section class="freed-proof freed-reveal">
   <div class="freed-container">
     <div class="freed-label">WHAT CLINICIANS SAY</div>
     <h2>From the practitioners using Stream <em>right now.</em></h2>
@@ -1151,7 +1167,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </section>
 
 <!-- SWITCHER -->
-<section class="freed-switcher" id="switch">
+<section class="freed-switcher freed-reveal" id="switch">
   <div class="freed-container">
     <div class="freed-switcher-card">
       <div>
@@ -1195,7 +1211,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </section>
 
 <!-- PRICING -->
-<section class="freed-pricing" id="pricing">
+<section class="freed-pricing freed-reveal" id="pricing">
   <div class="freed-container">
     <div class="freed-label" style="text-align:center;">HONEST PRICING</div>
     <h2>More than Freed Premier does. <em>For $60 less in year one.</em></h2>
@@ -1206,6 +1222,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
         <div class="freed-price-name">The whole chart, not just the note <span class="freed-limited-badge">LIMITED</span></div>
         <div class="freed-price-amount"><s>$149</s> $59</div>
         <div class="freed-price-per">per clinician / month · 30-day free trial</div>
+        <div class="freed-price-per" style="margin-top:-4px;">then $149/mo after year one</div>
         <ul class="freed-price-features">
           <li class="has">Unlimited visits, notes, recordings</li>
           <li class="has">Structured A/P per problem</li>
@@ -1240,7 +1257,7 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </section>
 
 <!-- FINAL CTA -->
-<section class="freed-final" id="cta">
+<section class="freed-final freed-reveal" id="cta">
   <div class="freed-container">
     <h2>Write the way you read. <em>SOAP in, APSO out.</em></h2>
     <p class="freed-final-body">30-day free trial. No credit card. $59/month for your first year. Takes under three minutes to start.</p>
@@ -1263,11 +1280,21 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 </div>
 
 <script is:inline>
+// Override nav CTA for this page
+const navCta = document.querySelector('.nav-cta');
+if (navCta) {
+  navCta.href = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source=compare-freed&utm_medium=landing&utm_campaign=conquest-v4&utm_content=sticky-nav';
+  const full = navCta.querySelector('.nav-cta-full');
+  const short = navCta.querySelector('.nav-cta-short');
+  if (full) full.textContent = 'Start free for 30 days →';
+  if (short) short.textContent = 'Start free →';
+}
+
 // Scroll reveal
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+document.querySelectorAll('.freed-reveal').forEach(el => obs.observe(el));
 </script>
 
 </Base>
