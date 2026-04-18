@@ -374,28 +374,45 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
   margin-bottom: 40px;
 }
 .freed-tour-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.freed-tour-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  grid-auto-rows: 1fr;
 }
 .freed-tour-card {
   background: var(--cream);
   border: 1px solid var(--rule);
   border-radius: 16px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
 }
-.freed-tour-card-body { flex: 1; }
 .freed-tour-card-visual {
-  min-height: 200px;
   padding: 16px;
   background: var(--paper);
   border-bottom: 1px solid var(--rule);
 }
 .freed-tour-card-body {
   padding: 24px;
+}
+/* Full-width demo cards — horizontal split */
+.freed-tour-card--wide {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+}
+.freed-tour-card--wide .freed-tour-card-visual {
+  border-bottom: none;
+  border-right: 1px solid var(--rule);
+  padding: 16px;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+}
+.freed-tour-card--wide .freed-tour-card-body {
+  padding: 36px;
 }
 .freed-tour-card-label {
   font-family: 'JetBrains Mono', monospace;
@@ -884,7 +901,9 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
 @media (max-width: 900px) {
   .freed-hero-grid { grid-template-columns: 1fr; }
   .freed-thesis-grid { grid-template-columns: 1fr; }
-  .freed-tour-grid { grid-template-columns: 1fr; }
+  .freed-tour-pair { grid-template-columns: 1fr; }
+  .freed-tour-card--wide { grid-template-columns: 1fr; }
+  .freed-tour-card--wide .freed-tour-card-visual { border-right: none; border-bottom: 1px solid var(--rule); }
   .freed-proof-grid { grid-template-columns: 1fr; }
   .freed-switcher-card { grid-template-columns: 1fr; padding: 36px; }
   .freed-pricing-grid { grid-template-columns: 1fr; max-width: 460px; }
@@ -1018,67 +1037,70 @@ const onboardUrl = 'https://stream.riverrecords.ai/onboard/stream-pro?utm_source
     <h2>Four things your scribe <em>doesn't</em> do.</h2>
     <p class="freed-tour-lede">Because the note is structured per problem, Stream can do things other scribes architecturally can't.</p>
     <div class="freed-tour-grid">
-      <!-- Card 1: Huddle -->
-      <div class="freed-tour-card">
-        <div class="freed-tour-card-visual">
-          <div class="huddle-mini">
-            <div class="huddle-mini-tabs">
-              <span class="huddle-mini-tab">Active</span>
-              <span class="huddle-mini-tab huddle-mini-tab--active">Falling off</span>
-              <span class="huddle-mini-tab">Compliance</span>
+      <!-- Row 1: Huddle + Scratchpad (paired short cards) -->
+      <div class="freed-tour-pair">
+        <div class="freed-tour-card">
+          <div class="freed-tour-card-visual">
+            <div class="huddle-mini">
+              <div class="huddle-mini-tabs">
+                <span class="huddle-mini-tab">Active</span>
+                <span class="huddle-mini-tab huddle-mini-tab--active">Falling off</span>
+                <span class="huddle-mini-tab">Compliance</span>
+              </div>
+              <div class="huddle-mini-row"><span class="huddle-mini-name">Hypothyroidism</span><span class="huddle-mini-meta">11 MO</span></div>
+              <div class="huddle-mini-row"><span class="huddle-mini-name">CKD stage 2</span><span class="huddle-mini-meta">13 MO</span></div>
+              <div class="huddle-mini-row"><span class="huddle-mini-name">Diabetes · HTN · Anxiety</span><span class="huddle-mini-meta">ACTIVE</span></div>
             </div>
-            <div class="huddle-mini-row"><span class="huddle-mini-name">Hypothyroidism</span><span class="huddle-mini-meta">11 MO</span></div>
-            <div class="huddle-mini-row"><span class="huddle-mini-name">CKD stage 2</span><span class="huddle-mini-meta">13 MO</span></div>
-            <div class="huddle-mini-row"><span class="huddle-mini-name">Diabetes · HTN · Anxiety</span><span class="huddle-mini-meta">ACTIVE</span></div>
+          </div>
+          <div class="freed-tour-card-body">
+            <div class="freed-tour-card-label">01 · HUDDLE</div>
+            <h3>Every patient, pre-organized.</h3>
+            <p>Open a patient 5 minutes before their visit. Huddle shows three lenses: active problems from your last 3 visits, problems falling off your attention (10+ months), and compliance flags. Clinician priority first, revenue capture as a byproduct.</p>
           </div>
         </div>
-        <div class="freed-tour-card-body">
-          <div class="freed-tour-card-label">01 · HUDDLE</div>
-          <h3>Every patient, pre-organized.</h3>
-          <p>Open a patient 5 minutes before their visit. Huddle shows three lenses: active problems from your last 3 visits, problems falling off your attention (10+ months), and compliance flags. Clinician priority first, revenue capture as a byproduct.</p>
+        <div class="freed-tour-card">
+          <div class="freed-tour-card-visual">
+            <div class="scratchpad-mock">"Mom's breast ca at 58 — update fam hx. Refill rx for 90 days. Pt wants to try walking group."</div>
+            <div class="scratchpad-arrow">↓</div>
+            <div class="scratchpad-result">
+              <div class="scratchpad-result-label">INCORPORATED INTO NOTE</div>
+              <div><strong>Family History</strong> · updated</div>
+              <div><strong>HTN · Plan</strong> · refill + walking group</div>
+            </div>
+          </div>
+          <div class="freed-tour-card-body">
+            <div class="freed-tour-card-label">02 · SCRATCHPAD</div>
+            <h3>Type what you don't want to forget.</h3>
+            <p>Jot free-text notes during the visit in the Scratchpad field. When the note generates, Stream incorporates what you wrote into the right sections. Your mental sticky notes become permanent chart content.</p>
+          </div>
         </div>
       </div>
-      <!-- Card 2: Note with EncounterViewDemo -->
-      <div class="freed-tour-card">
-        <div class="freed-tour-card-visual" style="padding:8px;">
-          <div class="demo-frame" style="box-shadow:none;border:none;">
+
+      <!-- Row 2: Note (full-width with demo) -->
+      <div class="freed-tour-card freed-tour-card--wide">
+        <div class="freed-tour-card-visual" style="padding:12px;">
+          <div class="demo-frame" style="box-shadow:none;border:none;width:100%;">
             <EncounterViewDemo client:visible />
           </div>
         </div>
         <div class="freed-tour-card-body">
-          <div class="freed-tour-card-label">02 · NOTE</div>
+          <div class="freed-tour-card-label">03 · NOTE</div>
           <h3>A/P split per problem, every visit.</h3>
           <p>Stream's scribe doesn't generate one SOAP blob — it generates Subjective, Objective, and separate Assessment &amp; Plan sections for each medical problem discussed. Toggle between Classic SOAP and Problem-Based to see both shapes of the same visit. One architectural choice; everything else on this page is downstream of it.</p>
         </div>
       </div>
-      <!-- Card 3: Timeline + Recap -->
-      <div class="freed-tour-card">
-        <div class="freed-tour-card-visual" style="padding:8px;">
-          <div class="demo-frame" style="box-shadow:none;border:none;">
+
+      <!-- Row 3: Timeline + Recap (full-width with demo) -->
+      <div class="freed-tour-card freed-tour-card--wide">
+        <div class="freed-tour-card-visual" style="padding:12px;">
+          <div class="demo-frame" style="box-shadow:none;border:none;width:100%;">
             <TimelineRecapDemo client:visible />
           </div>
         </div>
         <div class="freed-tour-card-body">
-          <div class="freed-tour-card-label">03 · TIMELINE + RECAP</div>
+          <div class="freed-tour-card-label">04 · TIMELINE + RECAP</div>
           <h3>Open any problem. See it across time.</h3>
           <p>Pick a problem from Huddle. Timeline shows every A&amp;P entry you've written for that problem across every visit — real chart data, not AI output. Hit Recap when you need the AI-generated narrative, medication trajectory with outcome badges, and key metrics. You see both layers; you trust both for different reasons.</p>
-        </div>
-      </div>
-      <!-- Card 4: Scratchpad -->
-      <div class="freed-tour-card">
-        <div class="freed-tour-card-visual">
-          <div class="scratchpad-mock">"Mom's breast ca at 58 — update fam hx. Refill rx for 90 days. Pt wants to try walking group."</div>
-          <div class="scratchpad-arrow">↓</div>
-          <div class="scratchpad-result">
-            <div class="scratchpad-result-label">INCORPORATED INTO NOTE</div>
-            <div><strong>Family History</strong> · updated</div>
-            <div><strong>HTN · Plan</strong> · refill + walking group</div>
-          </div>
-        </div>
-        <div class="freed-tour-card-body">
-          <div class="freed-tour-card-label">04 · SCRATCHPAD</div>
-          <h3>Type what you don't want to forget.</h3>
-          <p>Jot free-text notes during the visit in the Scratchpad field. When the note generates, Stream incorporates what you wrote into the right sections. Your mental sticky notes become permanent chart content.</p>
         </div>
       </div>
     </div>
