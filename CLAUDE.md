@@ -120,10 +120,10 @@ Reusable components are Astro files in `src/components/`.
 Shared styles (buttons, nav, footer, proof strip, testimonials, CTA, philosophy) in `public/shared.css`.
 
 ## Pricing (as of April 2026)
-- Introductory: $59/month for first 12 months (guaranteed)
-- Standard (after year one): $149/month
+- Monthly: $149/month
+- Annual: $99/month ($1,188/year)
 - Trial: 30 days free, no credit card required
-- Freed comparison: $99/month (Freed's listed price)
+- Freed comparison: $119/month (Freed Premier tier)
 
 ### Changing pricing
 All pricing is centralized in `src/config/pricing.ts`. Edit the values there and push — every page updates automatically. The only exceptions are:
